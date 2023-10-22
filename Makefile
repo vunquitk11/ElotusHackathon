@@ -13,4 +13,7 @@ migrateup:
 migratedown:
 	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/elotus?sslmode=disable" --verbose down
 
-.PHONY: postgres createdb dropdb migrateup migratedown
+gen-orm-models:
+	sqlboiler --wipe psql && GOFLAGS="-mod=vendor" goimports -w repository/orm/*.go
+
+.PHONY: postgres createdb dropdb migrateup migratedown api-gen-models
