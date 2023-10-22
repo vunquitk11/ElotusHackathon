@@ -2,12 +2,22 @@ package file
 
 import (
 	"context"
-
+	"errors"
 	"github.com/elotus_hackathon/model"
 )
 
 // UploadFile saves new image file to db
-func (i impl) UploadFile(ctx context.Context, input model.File) (model.File, error) {
+func (i impl) UploadFile(ctx context.Context, username string, input model.File) (model.File, error) {
+	uploader, err := i.repo.User().GetUserByUsername(ctx, username)
+	if err != nil {
+		return model.File{}, err
+	}
+
+	if uploader.ID == 0 {
+		return model.File{}, errors.New("user not found")
+	}
+
+	input.UserID = uploader.ID
 	file, err := i.repo.File().InsertFile(ctx, input)
 	if err != nil {
 		return model.File{}, err

@@ -10,7 +10,7 @@ import (
 // The Controller interface provides specification related to order functionality.
 type Controller interface {
 	// UploadFile saves new image file to db
-	UploadFile(ctx context.Context, input model.File) (model.File, error)
+	UploadFile(ctx context.Context, username string, input model.File) (model.File, error)
 }
 
 type impl struct {

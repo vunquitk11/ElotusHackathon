@@ -7,6 +7,7 @@ import (
 	"github.com/elotus_hackathon/handler/authenticated"
 	"github.com/elotus_hackathon/handler/public"
 	"github.com/elotus_hackathon/pkg/httpserv"
+	"github.com/elotus_hackathon/pkg/jwt"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -32,8 +33,8 @@ func (rtr Router) routes(r chi.Router) {
 
 func (rtr Router) authenticated(r chi.Router) {
 	const prefix = "/authenticated"
+	r.Use(jwt.Authenticator)
 	r.Route(prefix, func(r chi.Router) {
-		r.Get("/test-auth", rtr.authenticatedHandler.TestAuth())
 		r.Post("/upload", rtr.authenticatedHandler.UploadFile())
 	})
 }

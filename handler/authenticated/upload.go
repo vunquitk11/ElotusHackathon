@@ -16,6 +16,13 @@ const maximumBytes = 8000000
 func (h Handler) UploadFile() http.HandlerFunc {
 	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
+
+		// pull username from context
+		username := ctx.Value("userName").(string)
+		if username == "" {
+			return errors.New("user not found")
+		}
+
 		uploadFile, header, err := r.FormFile("file")
 		if err != nil {
 			return err
@@ -39,7 +46,7 @@ func (h Handler) UploadFile() http.HandlerFunc {
 		}
 		imgBase64Str := base64.StdEncoding.EncodeToString(data)
 
-		_, err = h.fileCtrl.UploadFile(ctx, model.File{
+		_, err = h.fileCtrl.UploadFile(ctx, username, model.File{
 			UserID: 1,
 			Name:   header.Filename,
 			Type:   contentType,

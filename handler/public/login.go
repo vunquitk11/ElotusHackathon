@@ -2,10 +2,12 @@ package public
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/elotus_hackathon/model"
 	"github.com/elotus_hackathon/pkg/httpserv"
+	"github.com/elotus_hackathon/pkg/jwt"
 )
 
 // Login is handler func for login to system
@@ -22,7 +24,7 @@ func (h Handler) Login() http.HandlerFunc {
 			return err
 		}
 
-		result, err := h.userCtrl.Login(ctx, model.User{
+		user, err := h.userCtrl.Login(ctx, model.User{
 			Username: req.Username,
 			Password: req.Password,
 		})
@@ -30,7 +32,21 @@ func (h Handler) Login() http.HandlerFunc {
 			return err
 		}
 
-		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: result})
+		if user.ID == 0 {
+			return errors.New("login failed")
+		}
+
+		tokenString, expirationTime, err := jwt.GenerateToken(user.Username)
+		// we set the client cookie for "token" as the JWT we just generated
+		// we also set an expiry time which is the same as the token itself
+		http.SetCookie(w, &http.Cookie{
+			Name:    "token",
+			Value:   tokenString,
+			Path:    "/",
+			Expires: expirationTime,
+		})
+
+		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: "success"})
 		return nil
 	})
 }

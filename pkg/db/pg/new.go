@@ -17,9 +17,7 @@ func NewPool(
 	poolMaxOpenConns,
 	poolMaxIdleConns int,
 ) (BeginnerExecutor, error) {
-	fmt.Println("url: ", url)
 	log.Println("Initializing Postgres")
-
 	conn, err := sql.Open("postgres", url)
 	if err != nil {
 		return nil, pkgerrors.WithStack(fmt.Errorf("opening DB failed. err: %w", err))
