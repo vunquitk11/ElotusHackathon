@@ -194,8 +194,8 @@ type fileL struct{}
 
 var (
 	fileAllColumns            = []string{"id", "user_id", "name", "type", "size", "data", "created_at", "updated_at"}
-	fileColumnsWithoutDefault = []string{"id", "user_id", "name", "type", "size", "data"}
-	fileColumnsWithDefault    = []string{"created_at", "updated_at"}
+	fileColumnsWithoutDefault = []string{"user_id", "name", "type", "size", "data"}
+	fileColumnsWithDefault    = []string{"id", "created_at", "updated_at"}
 	filePrimaryKeyColumns     = []string{"id"}
 	fileGeneratedColumns      = []string{}
 )

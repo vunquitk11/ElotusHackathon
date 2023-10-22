@@ -1,9 +1,15 @@
 package user
 
-import "github.com/elotus_hackathon/repository"
+import (
+	"context"
+
+	"github.com/elotus_hackathon/model"
+	"github.com/elotus_hackathon/repository"
+)
 
 // The Controller interface provides specification related to order functionality.
 type Controller interface {
+	Register(ctx context.Context, input model.User) (model.User, error)
 }
 
 type impl struct {

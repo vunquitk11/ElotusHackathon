@@ -41,5 +41,6 @@ func (rtr Router) public(r chi.Router) {
 	const prefix = "/public"
 	r.Route(prefix, func(r chi.Router) {
 		r.Get("/test-public", rtr.publicHandler.TestPublic())
+		r.Post("/register", rtr.publicHandler.Register())
 	})
 }
