@@ -11,6 +11,8 @@ import (
 type Repository interface {
 	// InsertFile saves new file to DB
 	InsertFile(ctx context.Context, input model.File) (model.File, error)
+	// GetFilesByUserID return list file by user id
+	GetFilesByUserID(ctx context.Context, userID int64) ([]model.File, error)
 }
 
 // New returns an implementation instance satisfying Repository
