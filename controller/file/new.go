@@ -1,9 +1,16 @@
 package file
 
-import "github.com/elotus_hackathon/repository"
+import (
+	"context"
+
+	"github.com/elotus_hackathon/model"
+	"github.com/elotus_hackathon/repository"
+)
 
 // The Controller interface provides specification related to order functionality.
 type Controller interface {
+	// UploadFile saves new image file to db
+	UploadFile(ctx context.Context, input model.File) (model.File, error)
 }
 
 type impl struct {

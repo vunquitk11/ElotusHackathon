@@ -1,6 +1,7 @@
 package httpserv
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -12,6 +13,7 @@ func ErrHandlerFunc(h func(w http.ResponseWriter, r *http.Request) error) http.H
 		ctx := r.Context()
 
 		if err := h(w, r); err != nil {
+			fmt.Println("ERROR IS: ", err.Error())
 			RespondJSON(ctx, w, err)
 
 			if werr, ok := err.(*Error); ok {

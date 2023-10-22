@@ -34,13 +34,13 @@ func (rtr Router) authenticated(r chi.Router) {
 	const prefix = "/authenticated"
 	r.Route(prefix, func(r chi.Router) {
 		r.Get("/test-auth", rtr.authenticatedHandler.TestAuth())
+		r.Post("/upload", rtr.authenticatedHandler.UploadFile())
 	})
 }
 
 func (rtr Router) public(r chi.Router) {
 	const prefix = "/public"
 	r.Route(prefix, func(r chi.Router) {
-		r.Get("/test-public", rtr.publicHandler.TestPublic())
 		r.Post("/register", rtr.publicHandler.Register())
 		r.Post("/login", rtr.publicHandler.Login())
 	})
