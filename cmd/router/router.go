@@ -36,6 +36,7 @@ func (rtr Router) authenticated(r chi.Router) {
 	r.Use(jwt.Authenticator)
 	r.Route(prefix, func(r chi.Router) {
 		r.Post("/upload", rtr.authenticatedHandler.UploadFile())
+		r.Post("/logout", rtr.authenticatedHandler.Logout())
 	})
 }
 

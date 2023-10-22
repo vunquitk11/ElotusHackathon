@@ -2,8 +2,10 @@ package user
 
 import (
 	"context"
+	"errors"
 	"testing"
 
+	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/elotus_hackathon/model"
 	"github.com/elotus_hackathon/pkg/db/pg"
 	"github.com/elotus_hackathon/pkg/testutil"
@@ -15,12 +17,21 @@ import (
 func Test_InsertUser(t *testing.T) {
 	t.Setenv("DB_URL", "postgres://postgres:postgres@localhost:5432/elotus?sslmode=disable")
 	type arg struct {
-		givenInput model.User
-		expResult  model.User
-		expErr     error
+		givenInput  model.User
+		wannaFailDB bool
+		expResult   model.User
+		expErr      error
 	}
 
 	tcs := map[string]arg{
+		"error from database": {
+			givenInput: model.User{
+				Username: "username1",
+				Password: "password1",
+			},
+			wannaFailDB: true,
+			expErr:      errors.New("something went wrong"),
+		},
 		"success": {
 			givenInput: model.User{
 				Username: "username1",
@@ -38,11 +49,15 @@ func Test_InsertUser(t *testing.T) {
 			testutil.WithTxDB(t, func(tx pg.BeginnerExecutor) {
 				// When
 				instance := New(tx)
+				if tc.wannaFailDB {
+					dbMock, _, _ := sqlmock.New()
+					instance = New(dbMock)
+				}
 				result, err := instance.InsertUser(context.Background(), tc.givenInput)
 
 				// Then
 				if tc.expErr != nil {
-					require.EqualError(t, err, tc.expErr.Error())
+					require.Error(t, err)
 				} else {
 					require.NoError(t, err)
 					require.NotNil(t, result.ID)

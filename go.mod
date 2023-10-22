@@ -3,6 +3,7 @@ module github.com/elotus_hackathon
 go 1.20
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.4.1
 	github.com/friendsofgo/errors v0.9.2
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/golang-jwt/jwt/v5 v5.0.0
