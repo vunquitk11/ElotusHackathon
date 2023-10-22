@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"errors"
+
 	"github.com/elotus_hackathon/model"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -13,10 +15,13 @@ func (i impl) Login(ctx context.Context, input model.User) (model.User, error) {
 	if err != nil {
 		return model.User{}, err
 	}
+	if user.ID == 0 {
+		return model.User{}, model.ErrUserNotFound
+	}
 
 	// Comparing the password with the hash
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
-		return model.User{}, err
+		return model.User{}, errors.New("incorrect password")
 	}
 
 	return user, nil

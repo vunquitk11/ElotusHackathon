@@ -2,7 +2,6 @@ package file
 
 import (
 	"context"
-	"errors"
 
 	"github.com/elotus_hackathon/model"
 )
@@ -15,7 +14,7 @@ func (i impl) GetFilesByUsername(ctx context.Context, username string) ([]model.
 	}
 
 	if uploader.ID == 0 {
-		return nil, errors.New("user not found")
+		return nil, model.ErrUserNotFound
 	}
 
 	files, err := i.repo.File().GetFilesByUserID(ctx, uploader.ID)

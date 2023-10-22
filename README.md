@@ -15,8 +15,10 @@ go run cmd/*.go
 ##APIs
 
 ###REST API server
-Authenticated: http://localhost:3000/authenticated
-Public: http://localhost:3000/public
+
+###Authenticated: http://localhost:3000/authenticated
+
+###Public: http://localhost:3000/public
 
 ### Register
 ```http request method
@@ -117,4 +119,7 @@ GET http://localhost:3000/authenticated/files
     + Handler: Get request from httpRequest, decode, validate, call controllers, write httpResponse
     + Controller: Handle business logic, call repositories
     + Repository: Data access layer 
-     
+    
+## Testing Image Data
+- Get data from file record
+- Use this link for checking if generate correct image from base64 data: https://codebeautify.org/base64-to-image-converter

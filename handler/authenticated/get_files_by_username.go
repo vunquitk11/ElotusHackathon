@@ -1,9 +1,9 @@
 package authenticated
 
 import (
-	"errors"
 	"net/http"
 
+	"github.com/elotus_hackathon/model"
 	"github.com/elotus_hackathon/pkg/httpserv"
 )
 
@@ -15,7 +15,7 @@ func (h Handler) GetFilesByUser() http.HandlerFunc {
 		// pull username from context
 		username := ctx.Value("userName").(string)
 		if username == "" {
-			return errors.New("user not found")
+			return model.ErrUserNotFound
 		}
 
 		files, err := h.fileCtrl.GetFilesByUsername(ctx, username)

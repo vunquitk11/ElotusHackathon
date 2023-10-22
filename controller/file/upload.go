@@ -2,7 +2,6 @@ package file
 
 import (
 	"context"
-	"errors"
 	"github.com/elotus_hackathon/model"
 )
 
@@ -14,7 +13,7 @@ func (i impl) UploadFile(ctx context.Context, username string, input model.File)
 	}
 
 	if uploader.ID == 0 {
-		return model.File{}, errors.New("user not found")
+		return model.File{}, model.ErrUserNotFound
 	}
 
 	input.UserID = uploader.ID

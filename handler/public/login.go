@@ -2,7 +2,6 @@ package public
 
 import (
 	"encoding/json"
-	"errors"
 	"net/http"
 
 	"github.com/elotus_hackathon/model"
@@ -30,10 +29,6 @@ func (h Handler) Login() http.HandlerFunc {
 		})
 		if err != nil {
 			return err
-		}
-
-		if user.ID == 0 {
-			return errors.New("login failed")
 		}
 
 		tokenString, expirationTime, err := jwt.GenerateToken(user.Username)

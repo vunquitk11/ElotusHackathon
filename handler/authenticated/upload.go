@@ -20,7 +20,7 @@ func (h Handler) UploadFile() http.HandlerFunc {
 		// pull username from context
 		username := ctx.Value("userName").(string)
 		if username == "" {
-			return errors.New("user not found")
+			return model.ErrUserNotFound
 		}
 
 		uploadFile, header, err := r.FormFile("file")
