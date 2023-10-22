@@ -120,6 +120,7 @@ GET http://localhost:3000/authenticated/files
     + Controller: Handle business logic, call repositories
     + Repository: Data access layer 
     
-## Testing Image Data
+## Testing
 - Get data from file record
 - Use this link for checking if generate correct image from base64 data: https://codebeautify.org/base64-to-image-converter
+- Postman collection in /postman folder
