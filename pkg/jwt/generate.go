@@ -1,6 +1,9 @@
 package jwt
 
 import (
+	"math/rand"
+	"os"
+	"strconv"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -8,8 +11,12 @@ import (
 
 func GenerateToken(username string) (string, time.Time, error) {
 	// Declare the expiration time of the token
-	// here, we have kept it as 5 minutes
-	expirationTime := time.Now().Add(2 * time.Hour)
+	minutes, err := strconv.Atoi(os.Getenv("EXPIRATION_MINUTES"))
+	if err != nil {
+		return "", time.Time{}, err
+	}
+
+	expirationTime := time.Now().Add(time.Duration(rand.Int31n(int32(minutes))) * time.Minute)
 	// Create the JWT claims, which includes the username and expiry time
 	claims := &Claims{
 		Username: username,
@@ -24,7 +31,6 @@ func GenerateToken(username string) (string, time.Time, error) {
 	// Create the JWT string
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
-		// If there is an error in creating the JWT return an internal server error
 		return "", time.Time{}, err
 	}
 
