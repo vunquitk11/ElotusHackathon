@@ -10,6 +10,7 @@ import (
 // The Controller interface provides specification related to order functionality.
 type Controller interface {
 	Register(ctx context.Context, input model.User) (model.User, error)
+	Login(ctx context.Context, input model.User) (string, error)
 }
 
 type impl struct {

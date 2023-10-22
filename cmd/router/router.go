@@ -42,5 +42,6 @@ func (rtr Router) public(r chi.Router) {
 	r.Route(prefix, func(r chi.Router) {
 		r.Get("/test-public", rtr.publicHandler.TestPublic())
 		r.Post("/register", rtr.publicHandler.Register())
+		r.Post("/login", rtr.publicHandler.Login())
 	})
 }

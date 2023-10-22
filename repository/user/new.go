@@ -10,6 +10,8 @@ import (
 type Repository interface {
 	// InsertUser saves new user to DB
 	InsertUser(ctx context.Context, input model.User) (model.User, error)
+	// GetUserByUsername return user by username
+	GetUserByUsername(ctx context.Context, username string) (model.User, error)
 }
 
 // New returns an implementation instance satisfying Repository

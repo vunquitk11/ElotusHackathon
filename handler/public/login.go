@@ -2,31 +2,14 @@ package public
 
 import (
 	"encoding/json"
-	"errors"
 	"net/http"
 
 	"github.com/elotus_hackathon/model"
 	"github.com/elotus_hackathon/pkg/httpserv"
 )
 
-type userRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-func (r userRequest) Validate() error {
-	if r.Username == "" {
-		return errors.New("empty username")
-	}
-
-	if r.Password == "" {
-		return errors.New("empty password")
-	}
-	return nil
-}
-
-// Register is handler func for register new user
-func (h Handler) Register() http.HandlerFunc {
+// Login is handler func for login to system
+func (h Handler) Login() http.HandlerFunc {
 	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
 
@@ -39,7 +22,7 @@ func (h Handler) Register() http.HandlerFunc {
 			return err
 		}
 
-		_, err := h.userCtrl.Register(ctx, model.User{
+		result, err := h.userCtrl.Login(ctx, model.User{
 			Username: req.Username,
 			Password: req.Password,
 		})
@@ -47,7 +30,7 @@ func (h Handler) Register() http.HandlerFunc {
 			return err
 		}
 
-		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: "success"})
+		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: result})
 		return nil
 	})
 }
