@@ -13,6 +13,7 @@ func ErrHandlerFunc(h func(w http.ResponseWriter, r *http.Request) error) http.H
 		ctx := r.Context()
 
 		if err := h(w, r); err != nil {
+			// TODO: Add log system here
 			fmt.Println("ERROR IS: ", err.Error())
 			RespondJSON(ctx, w, err)
 
