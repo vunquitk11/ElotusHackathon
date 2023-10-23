@@ -81,7 +81,7 @@ POST http://localhost:3000/authenticated/upload
 
 - Request body
 ```form-data
-file
+form-data `file`
 ```
 
 - Response body:
@@ -113,6 +113,10 @@ GET http://localhost:3000/authenticated/files
 ```
 
 ## Project architecture
+- ORM: Sqlboiler
+
+- Database: PostgresQL
+
 - Workflow: Request => Handler => Controller => Repository => Database
 
 - Three layers model:
