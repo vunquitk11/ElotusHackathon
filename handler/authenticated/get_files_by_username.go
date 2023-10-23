@@ -15,7 +15,11 @@ func (h Handler) GetFilesByUser() http.HandlerFunc {
 		// pull username from context
 		username := ctx.Value("userName").(string)
 		if username == "" {
-			return model.ErrUserNotFound
+			return &httpserv.Error{
+				Status: http.StatusUnauthorized,
+				Code:   "user_not_found",
+				Desc:   model.ErrUserNotFound.Error(),
+			}
 		}
 
 		files, err := h.fileCtrl.GetFilesByUsername(ctx, username)

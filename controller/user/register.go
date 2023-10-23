@@ -10,12 +10,13 @@ import (
 
 // Register create new user
 func (i impl) Register(ctx context.Context, input model.User) (model.User, error) {
-	if input.Username == "" {
-		return model.User{}, errors.New("empty username")
+	// check if username exist in db
+	existingUser, err := i.repo.User().GetUserByUsername(ctx, input.Username)
+	if err != nil {
+		return model.User{}, err
 	}
-
-	if input.Password == "" {
-		return model.User{}, errors.New("empty password")
+	if existingUser.ID != 0 {
+		return model.User{}, errors.New("user already exists")
 	}
 
 	// Hashing the password with the default cost of 10

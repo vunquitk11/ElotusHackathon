@@ -2,7 +2,6 @@ package authenticated
 
 import (
 	"encoding/base64"
-	"errors"
 	"io"
 	"net/http"
 
@@ -20,7 +19,11 @@ func (h Handler) UploadFile() http.HandlerFunc {
 		// pull username from context
 		username := ctx.Value("userName").(string)
 		if username == "" {
-			return model.ErrUserNotFound
+			return &httpserv.Error{
+				Status: http.StatusUnauthorized,
+				Code:   "user_not_found",
+				Desc:   model.ErrUserNotFound.Error(),
+			}
 		}
 
 		uploadFile, header, err := r.FormFile("file")
@@ -32,12 +35,20 @@ func (h Handler) UploadFile() http.HandlerFunc {
 		// valid and the content type of the uploaded file is an image
 		contentType := header.Header.Get("Content-Type")
 		if contentType != "image/png" && contentType != "image/jpeg" {
-			return errors.New("unsupported content type")
+			return &httpserv.Error{
+				Status: http.StatusBadRequest,
+				Code:   "unsupported_content_type",
+				Desc:   "unsupported content type",
+			}
 		}
 
 		// images larger than 8 megabytes should also be rejected
 		if header.Size > maximumBytes {
-			return errors.New("image too big")
+			return &httpserv.Error{
+				Status: http.StatusBadRequest,
+				Code:   "image_too_big",
+				Desc:   "image too big",
+			}
 		}
 
 		data, err := io.ReadAll(uploadFile)

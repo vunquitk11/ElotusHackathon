@@ -2,7 +2,6 @@ package public
 
 import (
 	"encoding/json"
-	"errors"
 	"net/http"
 
 	"github.com/elotus_hackathon/model"
@@ -16,11 +15,19 @@ type userRequest struct {
 
 func (r userRequest) Validate() error {
 	if r.Username == "" {
-		return errors.New("empty username")
+		return &httpserv.Error{
+			Status: http.StatusBadRequest,
+			Code:   "empty_username",
+			Desc:   "empty username",
+		}
 	}
 
 	if r.Password == "" {
-		return errors.New("empty password")
+		return &httpserv.Error{
+			Status: http.StatusBadRequest,
+			Code:   "empty_password",
+			Desc:   "empty password",
+		}
 	}
 	return nil
 }
