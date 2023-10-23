@@ -8,6 +8,20 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+var (
+	// use for unit test
+	generatePasswordFunc = generatePassword
+)
+
+func generatePassword(password string) (string, error) {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+
+	return string(hashedPassword), nil
+}
+
 // Register create new user
 func (i impl) Register(ctx context.Context, input model.User) (model.User, error) {
 	// check if username exist in db
@@ -20,12 +34,12 @@ func (i impl) Register(ctx context.Context, input model.User) (model.User, error
 	}
 
 	// Hashing the password with the default cost of 10
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
+	hashedPassword, err := generatePasswordFunc(input.Password)
 	if err != nil {
 		return model.User{}, err
 	}
 
-	input.Password = string(hashedPassword)
+	input.Password = hashedPassword
 	user, err := i.repo.User().InsertUser(ctx, input)
 	if err != nil {
 		return model.User{}, err
