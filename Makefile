@@ -6,6 +6,9 @@ ifndef DOCKER_COMPOSE_BIN:
 DOCKER_COMPOSE_BIN := docker-compose
 endif
 
+api-test:
+	go test -mod=vendor -coverprofile=c.out -failfast -timeout 5m ./...
+
 postgres:
 	docker run --name petme -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:12-alpine
 

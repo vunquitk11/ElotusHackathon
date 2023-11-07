@@ -8,7 +8,7 @@ pipeline {
         }
         stage('ci:test') {
             steps {
-                echo 'Hello world 2!'
+                sh 'make api-test'
             }
         }
     }
