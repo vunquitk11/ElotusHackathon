@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('ci:init') {
+            steps {
+                echo 'Hello world!'
+            }
+        }
+        stage('ci:test') {
+            steps {
+                echo 'Hello world 2!'
+            }
+        }
+    }
+}
