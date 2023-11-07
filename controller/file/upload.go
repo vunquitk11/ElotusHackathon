@@ -2,7 +2,7 @@ package file
 
 import (
 	"context"
-	"github.com/elotus_hackathon/model"
+	"github.com/petme/model"
 )
 
 // UploadFile saves new image file to db

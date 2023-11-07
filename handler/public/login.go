@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/pkg/httpserv"
-	"github.com/elotus_hackathon/pkg/jwt"
+	"github.com/petme/model"
+	"github.com/petme/pkg/httpserv"
+	"github.com/petme/pkg/jwt"
 )
 
 // Login is handler func for login to system

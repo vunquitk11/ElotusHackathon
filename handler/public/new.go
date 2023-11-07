@@ -1,7 +1,7 @@
 package public
 
 import (
-	"github.com/elotus_hackathon/controller/user"
+	"github.com/petme/controller/user"
 )
 
 // Handler is the web handler for this pkg

@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"github.com/elotus_hackathon/pkg/db/pg"
-	"github.com/elotus_hackathon/repository/file"
-	"github.com/elotus_hackathon/repository/user"
+	"github.com/petme/pkg/db/pg"
+	"github.com/petme/repository/file"
+	"github.com/petme/repository/user"
 )
 
 // Registry is the registry of all the domain specific repositories and also provides transaction capabilities.

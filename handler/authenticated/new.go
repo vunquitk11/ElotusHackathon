@@ -1,8 +1,8 @@
 package authenticated
 
 import (
-	"github.com/elotus_hackathon/controller/file"
-	"github.com/elotus_hackathon/controller/user"
+	"github.com/petme/controller/file"
+	"github.com/petme/controller/user"
 )
 
 // Handler is the web handler for this pkg

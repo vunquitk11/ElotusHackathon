@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/elotus_hackathon/pkg/db/pg"
+	"github.com/petme/pkg/db/pg"
 	"github.com/stretchr/testify/require"
 )
 

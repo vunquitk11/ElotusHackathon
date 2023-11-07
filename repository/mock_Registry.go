@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/elotus_hackathon/repository/file"
-	"github.com/elotus_hackathon/repository/user"
+	"github.com/petme/repository/file"
+	"github.com/petme/repository/user"
 	"github.com/stretchr/testify/mock"
 )
 

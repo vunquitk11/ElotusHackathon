@@ -3,10 +3,10 @@ package router
 import (
 	"context"
 
-	"github.com/elotus_hackathon/controller/file"
-	"github.com/elotus_hackathon/controller/user"
-	"github.com/elotus_hackathon/handler/authenticated"
-	"github.com/elotus_hackathon/handler/public"
+	"github.com/petme/controller/file"
+	"github.com/petme/controller/user"
+	"github.com/petme/handler/authenticated"
+	"github.com/petme/handler/public"
 )
 
 // New creates and returns a new Router instance

@@ -5,8 +5,8 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/pkg/httpserv"
+	"github.com/petme/model"
+	"github.com/petme/pkg/httpserv"
 )
 
 const maximumBytes = 8000000

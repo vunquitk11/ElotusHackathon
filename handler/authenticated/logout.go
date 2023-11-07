@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/elotus_hackathon/pkg/httpserv"
+	"github.com/petme/pkg/httpserv"
 )
 
 // Logout is handler func for logout of system

@@ -5,7 +5,7 @@ output: repository/orm
 no-hooks: true
 no-tests: true
 psql:
-  dbname: elotus
+  dbname: petmedb
   host: localhost
   port: 5432
   user: postgres

@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 
-	"github.com/elotus_hackathon/model"
+	"github.com/petme/model"
 	"github.com/stretchr/testify/mock"
 )
 

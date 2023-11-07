@@ -8,18 +8,18 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/elotus_hackathon/cmd/router"
-	"github.com/elotus_hackathon/controller/file"
-	"github.com/elotus_hackathon/controller/user"
-	"github.com/elotus_hackathon/pkg/db/pg"
-	"github.com/elotus_hackathon/pkg/httpserv"
-	"github.com/elotus_hackathon/repository"
+	"github.com/petme/cmd/router"
+	"github.com/petme/controller/file"
+	"github.com/petme/controller/user"
+	"github.com/petme/pkg/db/pg"
+	"github.com/petme/pkg/httpserv"
+	"github.com/petme/repository"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	pkgerrors "github.com/pkg/errors"
 )
 
-const projectDirName = "elotus_hackathon"
+const projectDirName = "petme"
 
 func loadEnv() {
 	projectName := regexp.MustCompile(`^(.*` + projectDirName + `)`)

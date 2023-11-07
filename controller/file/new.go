@@ -3,8 +3,8 @@ package file
 import (
 	"context"
 
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/repository"
+	"github.com/petme/model"
+	"github.com/petme/repository"
 )
 
 // The Controller interface provides specification related to order functionality.

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="elotus@localhost" uuid="7486db9b-aed4-4d5b-a7d0-e648aa8eab64">
+    <data-source source="LOCAL" name="petme@localhost" uuid="7486db9b-aed4-4d5b-a7d0-e648aa8eab64">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/elotus</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/petme</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

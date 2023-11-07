@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/repository"
-	"github.com/elotus_hackathon/repository/user"
+	"github.com/petme/model"
+	"github.com/petme/repository"
+	"github.com/petme/repository/user"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

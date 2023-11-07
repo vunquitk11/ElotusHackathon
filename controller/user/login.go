@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/elotus_hackathon/model"
+	"github.com/petme/model"
 	"golang.org/x/crypto/bcrypt"
 )
 

@@ -4,10 +4,10 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/elotus_hackathon/handler/authenticated"
-	"github.com/elotus_hackathon/handler/public"
-	"github.com/elotus_hackathon/pkg/httpserv"
-	"github.com/elotus_hackathon/pkg/jwt"
+	"github.com/petme/handler/authenticated"
+	"github.com/petme/handler/public"
+	"github.com/petme/pkg/httpserv"
+	"github.com/petme/pkg/jwt"
 	"github.com/go-chi/chi/v5"
 )
 

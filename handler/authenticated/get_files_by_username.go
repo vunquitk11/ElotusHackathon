@@ -3,8 +3,8 @@ package authenticated
 import (
 	"net/http"
 
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/pkg/httpserv"
+	"github.com/petme/model"
+	"github.com/petme/pkg/httpserv"
 )
 
 // GetFilesByUser return list file by login user

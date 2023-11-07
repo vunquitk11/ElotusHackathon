@@ -2,8 +2,8 @@ package user
 
 import (
 	"context"
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/pkg/db/pg"
+	"github.com/petme/model"
+	"github.com/petme/pkg/db/pg"
 )
 
 // Repository provides the specification of the functionality provided by this pkg

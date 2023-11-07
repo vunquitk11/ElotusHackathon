@@ -1,5 +1,5 @@
 ifndef PROJECT_NAME
-PROJECT_NAME := elotus_hackathon
+PROJECT_NAME := petme
 endif
 
 ifndef DOCKER_COMPOSE_BIN:
@@ -7,19 +7,19 @@ DOCKER_COMPOSE_BIN := docker-compose
 endif
 
 postgres:
-	docker run --name elotus_hackathon -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:12-alpine
+	docker run --name petme -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:12-alpine
 
 createdb:
-	docker exec -it elotus_hackathon createdb --username=postgres --owner=postgres elotus
+	docker exec -it petme createdb --username=postgres --owner=postgres petmedb
 
 dropdb:
-	docker exec -it elotus_hackathon dropdb --username=postgres elotus
+	docker exec -it petme dropdb --username=postgres petmedb
 
 migrateup:
-	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/elotus?sslmode=disable" --verbose up
+	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/petmedb?sslmode=disable" --verbose up
 
 migratedown:
-	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/elotus?sslmode=disable" --verbose down
+	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/petmedb?sslmode=disable" --verbose down
 
 gen-orm-models:
 	sqlboiler --wipe psql && GOFLAGS="-mod=vendor" goimports -w repository/orm/*.go

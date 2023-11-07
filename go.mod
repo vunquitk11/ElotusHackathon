@@ -1,4 +1,4 @@
-module github.com/elotus_hackathon
+module github.com/petme
 
 go 1.20
 

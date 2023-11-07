@@ -3,8 +3,8 @@ package user
 import (
 	"context"
 
-	"github.com/elotus_hackathon/model"
-	"github.com/elotus_hackathon/repository/orm"
+	"github.com/petme/model"
+	"github.com/petme/repository/orm"
 	pkgerrors "github.com/pkg/errors"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 )
