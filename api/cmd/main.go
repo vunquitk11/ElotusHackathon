@@ -3,12 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	router2 "github.com/petme/api/cmd/router"
-	"github.com/petme/api/internal/controller/file"
-	"github.com/petme/api/internal/controller/user"
-	"github.com/petme/api/internal/repository"
-	pg2 "github.com/petme/api/pkg/db/pg"
-	"github.com/petme/api/pkg/httpserv"
 	"log"
 	"os"
 	"regexp"
@@ -16,6 +10,9 @@ import (
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/petme/api/cmd/router"
+	"github.com/petme/api/pkg/db/pg"
+	"github.com/petme/api/pkg/httpserv"
 	pkgerrors "github.com/pkg/errors"
 )
 
@@ -54,7 +51,7 @@ func run(ctx context.Context) error {
 		return pkgerrors.WithStack(fmt.Errorf("invalid db pool max idle conns: %w", err))
 	}
 
-	conn, err := pg2.NewPool(os.Getenv("DB_URL"), dbOpenConnection, dbIdleConnection)
+	conn, err := pg.NewPool(os.Getenv("DB_URL"), dbOpenConnection, dbIdleConnection)
 	if err != nil {
 		return err
 	}
@@ -72,10 +69,10 @@ func run(ctx context.Context) error {
 
 func initRouter(
 	ctx context.Context,
-	dbConn pg2.BeginnerExecutor) (router2.Router, error) {
-	return router2.New(
+	dbConn pg.BeginnerExecutor) (router.Router, error) {
+	return router.New(
 		ctx,
-		user.New(repository.New(dbConn)),
-		file.New(repository.New(dbConn)),
+		nil,
+		nil,
 	), nil
 }

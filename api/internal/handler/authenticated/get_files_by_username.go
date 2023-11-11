@@ -1,20 +1,21 @@
 package authenticated
 
 import (
-	"github.com/petme/api/internal/model"
-	httpserv2 "github.com/petme/api/pkg/httpserv"
 	"net/http"
+
+	"github.com/petme/api/internal/model"
+	"github.com/petme/api/pkg/httpserv"
 )
 
 // GetFilesByUser return list file by login user
 func (h Handler) GetFilesByUser() http.HandlerFunc {
-	return httpserv2.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
+	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
 
 		// pull username from context
 		username := ctx.Value("userName").(string)
 		if username == "" {
-			return &httpserv2.Error{
+			return &httpserv.Error{
 				Status: http.StatusUnauthorized,
 				Code:   "user_not_found",
 				Desc:   model.ErrUserNotFound.Error(),
@@ -26,7 +27,7 @@ func (h Handler) GetFilesByUser() http.HandlerFunc {
 			return err
 		}
 
-		httpserv2.RespondJSON(ctx, w, files)
+		httpserv.RespondJSON(ctx, w, files)
 		return nil
 	})
 }

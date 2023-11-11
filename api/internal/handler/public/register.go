@@ -2,9 +2,10 @@ package public
 
 import (
 	"encoding/json"
-	"github.com/petme/api/internal/model"
-	httpserv2 "github.com/petme/api/pkg/httpserv"
 	"net/http"
+
+	"github.com/petme/api/internal/model"
+	"github.com/petme/api/pkg/httpserv"
 )
 
 type userRequest struct {
@@ -14,7 +15,7 @@ type userRequest struct {
 
 func (r userRequest) Validate() error {
 	if r.Username == "" {
-		return &httpserv2.Error{
+		return &httpserv.Error{
 			Status: http.StatusBadRequest,
 			Code:   "empty_username",
 			Desc:   "empty username",
@@ -22,7 +23,7 @@ func (r userRequest) Validate() error {
 	}
 
 	if r.Password == "" {
-		return &httpserv2.Error{
+		return &httpserv.Error{
 			Status: http.StatusBadRequest,
 			Code:   "empty_password",
 			Desc:   "empty password",
@@ -33,7 +34,7 @@ func (r userRequest) Validate() error {
 
 // Register is handler func for register new user
 func (h Handler) Register() http.HandlerFunc {
-	return httpserv2.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
+	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
 
 		var req userRequest
@@ -53,7 +54,7 @@ func (h Handler) Register() http.HandlerFunc {
 			return err
 		}
 
-		httpserv2.RespondJSON(ctx, w, httpserv2.Success{Message: "success"})
+		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: "success"})
 		return nil
 	})
 }

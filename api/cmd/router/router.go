@@ -2,11 +2,13 @@ package router
 
 import (
 	"context"
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
 	"github.com/petme/api/internal/handler/authenticated"
 	"github.com/petme/api/internal/handler/public"
 	"github.com/petme/api/pkg/httpserv"
 	"github.com/petme/api/pkg/jwt"
-	"net/http"
 )
 
 // Router defines the routes & handlers of the app

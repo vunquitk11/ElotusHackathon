@@ -1,13 +1,11 @@
-module github.com/petme
+module github.com/petme/api
 
 go 1.20
 
 require (
-	github.com/DATA-DOG/go-sqlmock v1.4.1
 	github.com/friendsofgo/errors v0.9.2
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/golang-jwt/jwt/v5 v5.0.0
-	github.com/google/go-cmp v0.5.8
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.6
 	github.com/pkg/errors v0.9.1

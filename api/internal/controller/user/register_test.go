@@ -3,12 +3,12 @@ package user
 import (
 	"context"
 	"errors"
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/internal/repository"
-	"github.com/petme/api/internal/repository/user"
 	"testing"
 	"time"
 
+	"github.com/petme/api/internal/model"
+	"github.com/petme/api/internal/repository"
+	"github.com/petme/api/internal/repository/user"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

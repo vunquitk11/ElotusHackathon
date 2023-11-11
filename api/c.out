@@ -1,0 +1,21 @@
+mode: set
+github.com/petme/api/internal/controller/user/login.go:12.80,15.16 2 0
+github.com/petme/api/internal/controller/user/login.go:15.16,17.3 1 0
+github.com/petme/api/internal/controller/user/login.go:18.2,18.18 1 0
+github.com/petme/api/internal/controller/user/login.go:18.18,20.3 1 0
+github.com/petme/api/internal/controller/user/login.go:23.2,23.100 1 0
+github.com/petme/api/internal/controller/user/login.go:23.100,25.3 1 0
+github.com/petme/api/internal/controller/user/login.go:27.2,27.18 1 0
+github.com/petme/api/internal/controller/user/new.go:21.47,25.2 1 1
+github.com/petme/api/internal/controller/user/register.go:16.56,18.16 2 0
+github.com/petme/api/internal/controller/user/register.go:18.16,20.3 1 0
+github.com/petme/api/internal/controller/user/register.go:22.2,22.36 1 0
+github.com/petme/api/internal/controller/user/register.go:26.83,29.16 2 1
+github.com/petme/api/internal/controller/user/register.go:29.16,31.3 1 1
+github.com/petme/api/internal/controller/user/register.go:32.2,32.26 1 1
+github.com/petme/api/internal/controller/user/register.go:32.26,34.3 1 1
+github.com/petme/api/internal/controller/user/register.go:37.2,38.16 2 1
+github.com/petme/api/internal/controller/user/register.go:38.16,40.3 1 1
+github.com/petme/api/internal/controller/user/register.go:42.2,44.16 3 1
+github.com/petme/api/internal/controller/user/register.go:44.16,46.3 1 1
+github.com/petme/api/internal/controller/user/register.go:48.2,48.18 1 1

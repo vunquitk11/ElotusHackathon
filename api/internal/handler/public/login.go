@@ -2,15 +2,16 @@ package public
 
 import (
 	"encoding/json"
-	"github.com/petme/api/internal/model"
-	httpserv2 "github.com/petme/api/pkg/httpserv"
-	"github.com/petme/api/pkg/jwt"
 	"net/http"
+
+	"github.com/petme/api/internal/model"
+	"github.com/petme/api/pkg/httpserv"
+	"github.com/petme/api/pkg/jwt"
 )
 
 // Login is handler func for login to system
 func (h Handler) Login() http.HandlerFunc {
-	return httpserv2.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
+	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
 
 		var req userRequest
@@ -40,7 +41,7 @@ func (h Handler) Login() http.HandlerFunc {
 			Expires: expirationTime,
 		})
 
-		httpserv2.RespondJSON(ctx, w, httpserv2.Success{Message: "success"})
+		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: "success"})
 		return nil
 	})
 }

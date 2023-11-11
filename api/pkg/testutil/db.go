@@ -3,11 +3,11 @@ package testutil
 import (
 	"context"
 	"database/sql"
-	"github.com/petme/api/pkg/db/pg"
 	"os"
 	"testing"
 	"time"
 
+	"github.com/petme/api/pkg/db/pg"
 	"github.com/stretchr/testify/require"
 )
 

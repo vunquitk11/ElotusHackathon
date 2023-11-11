@@ -1,14 +1,15 @@
 package authenticated
 
 import (
-	httpserv2 "github.com/petme/api/pkg/httpserv"
 	"net/http"
 	"time"
+
+	"github.com/petme/api/pkg/httpserv"
 )
 
 // Logout is handler func for logout of system
 func (h Handler) Logout() http.HandlerFunc {
-	return httpserv2.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
+	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
 
 		// immediately clear the token from cookie
@@ -19,7 +20,7 @@ func (h Handler) Logout() http.HandlerFunc {
 			Expires: time.Now(),
 		})
 
-		httpserv2.RespondJSON(ctx, w, httpserv2.Success{Message: "success"})
+		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: "success"})
 		return nil
 	})
 }

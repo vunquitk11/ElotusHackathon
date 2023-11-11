@@ -2,26 +2,27 @@ package authenticated
 
 import (
 	"encoding/base64"
-	model2 "github.com/petme/api/internal/model"
-	httpserv2 "github.com/petme/api/pkg/httpserv"
 	"io"
 	"net/http"
+
+	"github.com/petme/api/internal/model"
+	"github.com/petme/api/pkg/httpserv"
 )
 
 const maximumBytes = 8000000
 
 // UploadFile is handler func for upload file, just allow images
 func (h Handler) UploadFile() http.HandlerFunc {
-	return httpserv2.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
+	return httpserv.ErrHandlerFunc(func(w http.ResponseWriter, r *http.Request) error {
 		ctx := r.Context()
 
 		// pull username from context
 		username := ctx.Value("userName").(string)
 		if username == "" {
-			return &httpserv2.Error{
+			return &httpserv.Error{
 				Status: http.StatusUnauthorized,
 				Code:   "user_not_found",
-				Desc:   model2.ErrUserNotFound.Error(),
+				Desc:   model.ErrUserNotFound.Error(),
 			}
 		}
 
@@ -34,7 +35,7 @@ func (h Handler) UploadFile() http.HandlerFunc {
 		// valid and the content type of the uploaded file is an image
 		contentType := header.Header.Get("Content-Type")
 		if contentType != "image/png" && contentType != "image/jpeg" {
-			return &httpserv2.Error{
+			return &httpserv.Error{
 				Status: http.StatusBadRequest,
 				Code:   "unsupported_content_type",
 				Desc:   "unsupported content type",
@@ -43,7 +44,7 @@ func (h Handler) UploadFile() http.HandlerFunc {
 
 		// images larger than 8 megabytes should also be rejected
 		if header.Size > maximumBytes {
-			return &httpserv2.Error{
+			return &httpserv.Error{
 				Status: http.StatusBadRequest,
 				Code:   "image_too_big",
 				Desc:   "image too big",
@@ -56,7 +57,7 @@ func (h Handler) UploadFile() http.HandlerFunc {
 		}
 		imgBase64Str := base64.StdEncoding.EncodeToString(data)
 
-		_, err = h.fileCtrl.UploadFile(ctx, username, model2.File{
+		_, err = h.fileCtrl.UploadFile(ctx, username, model.File{
 			UserID: 1,
 			Name:   header.Filename,
 			Type:   contentType,
@@ -67,7 +68,7 @@ func (h Handler) UploadFile() http.HandlerFunc {
 			return err
 		}
 
-		httpserv2.RespondJSON(ctx, w, httpserv2.Success{Message: "success"})
+		httpserv.RespondJSON(ctx, w, httpserv.Success{Message: "success"})
 		return nil
 	})
 }

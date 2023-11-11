@@ -3,8 +3,8 @@ package user
 import (
 	"context"
 	"errors"
-	"github.com/petme/api/internal/model"
 
+	"github.com/petme/api/internal/model"
 	"golang.org/x/crypto/bcrypt"
 )
 
