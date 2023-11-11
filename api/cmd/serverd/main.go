@@ -10,7 +10,7 @@ import (
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-	"github.com/petme/api/cmd/router"
+	"github.com/petme/api/cmd/serverd/router"
 	"github.com/petme/api/pkg/db/pg"
 	"github.com/petme/api/pkg/httpserv"
 	pkgerrors "github.com/pkg/errors"

@@ -1,30 +1,82 @@
+# One file to rule to them all
+
 ifndef PROJECT_NAME
 PROJECT_NAME := petme
+endif
+
+ifndef PRODUCTION_ENVIRONMENT:
+PRODUCTION_ENVIRONMENT := prod
+endif
+
+ifndef DOCKER_BIN:
+DOCKER_BIN := docker
 endif
 
 ifndef DOCKER_COMPOSE_BIN:
 DOCKER_COMPOSE_BIN := docker-compose
 endif
 
+# Initialize the config for your local copy of the repo
+init:
+	echo "machine https://github.com/vunquitk11\nlogin username@spdigital.sg\npassword personalaccesstoken" > build/.netrc
+
+build-local-go-image:
+	${DOCKER_BIN} build -f build/local.go.Dockerfile -t ${PROJECT_NAME}-go-local:latest .
+	-${DOCKER_BIN} images -q -f "dangling=true" | xargs ${DOCKER_BIN} rmi -f
+
+# ----------------------------
+# Project level Methods
+# ----------------------------
+teardown:
+	${COMPOSE} down -v
+	${COMPOSE} rm --force --stop -v
+
+setup: api-setup
+migrate: api-pg-migrate
+
+# ----------------------------
+# api Methods
+# ----------------------------
+API_COMPOSE = ${COMPOSE} run --name ${PROJECT_NAME}-api-$${CONTAINER_SUFFIX:-local} --rm --service-ports -w /api api
+ifdef CONTAINER_SUFFIX
+api-test: api-setup
+endif
 api-test:
-	go test -mod=vendor -coverprofile=c.out -failfast -timeout 5m ./...
+	${API_COMPOSE} sh -c "go test -mod=vendor -coverprofile=c.out -failfast -timeout 5m ./..."
+api-run:
+	${API_COMPOSE} sh -c "go run -mod=vendor cmd/serverd/*.go"
+api-pg-migrate:
+	${COMPOSE} run --rm pg-migrate sh -c './migrate -path /api-migrations -database $$PG_URL up'
+api-pg-drop:
+	${COMPOSE} run --rm pg-migrate sh -c './migrate -path /api-migrations -database $$PG_URL drop'
+api-pg-redo: api-pg-drop api-pg-migrate
 
-postgres:
-	docker run --name petme -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:12-alpine
+ifdef CONTAINER_SUFFIX
+api-setup: volumes pg sleep api-pg-migrate
+else
+api-setup: pg sleep api-pg-migrate
+api-setup:
+	${DOCKER_BIN} image inspect ${PROJECT_NAME}-go-local:latest >/dev/null 2>&1 || make build-local-go-image
+endif
 
-createdb:
-	docker exec -it petme createdb --username=postgres --owner=postgres petmedb
 
-dropdb:
-	docker exec -it petme dropdb --username=postgres petmedb
+# ----------------------------
+# Base Methods
+# ----------------------------
+volumes:
+	${COMPOSE} up -d alpine
+	${DOCKER_BIN} cp ${shell pwd}/api/. ${PROJECT_NAME}-alpine-$${CONTAINER_SUFFIX:-local}:/api
+	${DOCKER_BIN} cp ${shell pwd}/api/data/migrations/. ${PROJECT_NAME}-alpine-$${CONTAINER_SUFFIX:-local}:/api-migrations
 
-migrateup:
-	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/petmedb?sslmode=disable" --verbose up
+COMPOSE := PROJECT_NAME=${PROJECT_NAME} ${DOCKER_COMPOSE_BIN} -f build/docker-compose.base.yaml
+ifdef CONTAINER_SUFFIX
+COMPOSE := ${COMPOSE} -f build/docker-compose.ci.yaml -p ${CONTAINER_SUFFIX}
+else
+COMPOSE := ${COMPOSE} -f build/docker-compose.local.yaml
+endif
 
-migratedown:
-	migrate -path data/migration --database "postgres://postgres:postgres@localhost:5432/petmedb?sslmode=disable" --verbose down
+pg:
+	${COMPOSE} up -d pg
 
-gen-orm-models:
-	sqlboiler --wipe psql && GOFLAGS="-mod=vendor" goimports -w repository/orm/*.go
-
-.PHONY: postgres createdb dropdb migrateup migratedown gen-orm-models
+sleep:
+	sleep 5
