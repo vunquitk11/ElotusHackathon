@@ -1,6 +1,6 @@
 FROM golang:1.21
 
-ENV GOPRIVATE=code.in.spdigital.sg
+ENV GOPRIVATE=github.com
 
 RUN apt-get update
 

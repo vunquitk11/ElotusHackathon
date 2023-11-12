@@ -32,7 +32,12 @@ teardown:
 	${COMPOSE} rm --force --stop -v
 
 setup: api-setup
+boilerplate: api-boilerplate
+run: api-run
+test: api-test
+models: api-gen-models
 migrate: api-pg-migrate
+
 
 # ----------------------------
 # api Methods
@@ -45,12 +50,16 @@ api-test:
 	${API_COMPOSE} sh -c "go test -mod=vendor -coverprofile=c.out -failfast -timeout 5m ./..."
 api-run:
 	${API_COMPOSE} sh -c "go run -mod=vendor cmd/serverd/*.go"
+api-update-vendor:
+	${API_COMPOSE} sh -c "go mod tidy -compat=1.17 && go mod vendor"
 api-pg-migrate:
 	${COMPOSE} run --rm pg-migrate sh -c './migrate -path /api-migrations -database $$PG_URL up'
 api-pg-drop:
 	${COMPOSE} run --rm pg-migrate sh -c './migrate -path /api-migrations -database $$PG_URL drop'
 api-pg-redo: api-pg-drop api-pg-migrate
-
+api-gen-models:
+	@${API_COMPOSE} sh -c 'sqlboiler --wipe psql && GOFLAGS="-mod=vendor" goimports -w internal/repository/orm/*.go'
+api-boilerplate: api-setup api-gen-models
 ifdef CONTAINER_SUFFIX
 api-setup: volumes pg sleep api-pg-migrate
 else
