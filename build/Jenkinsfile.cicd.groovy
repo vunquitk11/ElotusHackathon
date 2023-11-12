@@ -13,7 +13,6 @@ pipeline {
     }
     stage("ci:test & build") {
       stages {
-        stage("volumes") { steps { sh "make volumes" } }
         stage("test & Build") {
           parallel {
             stage("api") { steps { sh """
