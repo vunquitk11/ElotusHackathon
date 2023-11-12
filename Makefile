@@ -50,6 +50,10 @@ api-test:
 	${API_COMPOSE} sh -c "go test -mod=vendor -coverprofile=c.out -failfast -timeout 5m ./..."
 api-run:
 	${API_COMPOSE} sh -c "go run -mod=vendor cmd/serverd/*.go"
+api-build-binaries:
+	${API_COMPOSE} sh -c "\
+		go clean -mod=vendor -i -x -cache ./... && \
+		go build -mod=vendor -v -a -i -o binaries/serverd ./cmd/serverd"
 api-update-vendor:
 	${API_COMPOSE} sh -c "go mod tidy -compat=1.17 && go mod vendor"
 api-pg-migrate:

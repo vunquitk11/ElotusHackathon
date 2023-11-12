@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  pg:
+    expose:
+      - "5432"
+  pg-migrate:
+    volumes:
+      - api-migrations:/api-migrations
+  api:
+    image: golang:1.19
+    volumes:
+      - api:/api
+    environment:
+      SOME_STUFF_FLAG: "false"
+  alpine:
+    container_name: ${PROJECT_NAME}-alpine-${CONTAINER_SUFFIX:-local}
+    image: alpine
+    restart: "no"
+    volumes:
+      - api:/api
+      - api-migrations:/api-migrations
+    networks:
+      - network
+  mockery:
+    volumes:
+      - api:/api
+volumes:
+  api-migrations:
+    name: ${PROJECT_NAME}-api-migrate-${CONTAINER_SUFFIX:-local}
+  api:
+    name: ${PROJECT_NAME}-api-${CONTAINER_SUFFIX:-local}
