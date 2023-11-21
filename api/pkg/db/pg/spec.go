@@ -32,6 +32,7 @@ type BeginnerExecutor interface {
 	Beginner
 	ContextExecutor
 
+	PingContext(context.Context) error
 	Close() error
 	InstanceInfo() InstanceInfo
 }
