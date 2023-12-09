@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"github.com/petme/api/internal/repository/file"
-	"github.com/petme/api/internal/repository/user"
-	"github.com/petme/api/pkg/db/pg"
+	"github.com/letsvote/api/internal/repository/file"
+	"github.com/letsvote/api/internal/repository/user"
+	"github.com/letsvote/api/pkg/db/pg"
 )
 
 // Registry is the registry of all the domain specific repositories and also provides transaction capabilities.

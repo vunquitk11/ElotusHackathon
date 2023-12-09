@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/petme/api/cmd/serverd/router"
-	"github.com/petme/api/internal/repository"
-	"github.com/petme/api/pkg/app"
-	"github.com/petme/api/pkg/db/pg"
-	"github.com/petme/api/pkg/env"
-	"github.com/petme/api/pkg/httpserv"
+	"github.com/letsvote/api/cmd/serverd/router"
+	"github.com/letsvote/api/internal/repository"
+	"github.com/letsvote/api/pkg/app"
+	"github.com/letsvote/api/pkg/db/pg"
+	"github.com/letsvote/api/pkg/env"
+	"github.com/letsvote/api/pkg/httpserv"
 	pkgerrors "github.com/pkg/errors"
 )
 

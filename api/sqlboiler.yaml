@@ -5,10 +5,10 @@ output: internal/repository/orm
 no-hooks: true
 no-tests: true
 psql:
-  dbname: petme
+  dbname: letsvote
   host: pg
   port: 5432
-  user: petme
+  user: letsvote
   pass: ''
   sslmode: disable
   blacklist:

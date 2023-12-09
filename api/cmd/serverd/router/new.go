@@ -3,10 +3,10 @@ package router
 import (
 	"context"
 
-	"github.com/petme/api/internal/controller/file"
-	"github.com/petme/api/internal/controller/user"
-	"github.com/petme/api/internal/handler/authenticated"
-	"github.com/petme/api/internal/handler/public"
+	"github.com/letsvote/api/internal/controller/file"
+	"github.com/letsvote/api/internal/controller/user"
+	"github.com/letsvote/api/internal/handler/authenticated"
+	"github.com/letsvote/api/internal/handler/public"
 )
 
 // New creates and returns a new Router instance

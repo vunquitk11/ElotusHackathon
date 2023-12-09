@@ -3,8 +3,8 @@ package file
 import (
 	"context"
 
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/pkg/db/pg"
+	"github.com/letsvote/api/internal/model"
+	"github.com/letsvote/api/pkg/db/pg"
 )
 
 // Repository provides the specification of the functionality provided by this pkg

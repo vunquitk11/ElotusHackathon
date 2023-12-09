@@ -1,7 +1,7 @@
 # One file to rule to them all
 
 ifndef PROJECT_NAME
-PROJECT_NAME := petme
+PROJECT_NAME := letsvote
 endif
 
 ifndef PRODUCTION_ENVIRONMENT:

@@ -5,10 +5,10 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/petme/api/internal/handler/authenticated"
-	"github.com/petme/api/internal/handler/public"
-	"github.com/petme/api/pkg/httpserv"
-	"github.com/petme/api/pkg/jwt"
+	"github.com/letsvote/api/internal/handler/authenticated"
+	"github.com/letsvote/api/internal/handler/public"
+	"github.com/letsvote/api/pkg/httpserv"
+	"github.com/letsvote/api/pkg/jwt"
 )
 
 // Router defines the routes & handlers of the app

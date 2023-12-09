@@ -1,4 +1,4 @@
-module github.com/petme/api
+module github.com/letsvote/api
 
 go 1.20
 

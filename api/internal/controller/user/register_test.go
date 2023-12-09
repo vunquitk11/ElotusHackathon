@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/internal/repository"
-	"github.com/petme/api/internal/repository/user"
+	"github.com/letsvote/api/internal/model"
+	"github.com/letsvote/api/internal/repository"
+	"github.com/letsvote/api/internal/repository/user"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

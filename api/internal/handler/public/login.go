@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/pkg/httpserv"
-	"github.com/petme/api/pkg/jwt"
+	"github.com/letsvote/api/internal/model"
+	"github.com/letsvote/api/pkg/httpserv"
+	"github.com/letsvote/api/pkg/jwt"
 )
 
 // Login is handler func for login to system

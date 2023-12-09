@@ -3,7 +3,7 @@ package file
 import (
 	"context"
 
-	"github.com/petme/api/internal/model"
+	"github.com/letsvote/api/internal/model"
 )
 
 // UploadFile saves new image file to db

@@ -5,8 +5,8 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/pkg/httpserv"
+	"github.com/letsvote/api/internal/model"
+	"github.com/letsvote/api/pkg/httpserv"
 )
 
 const maximumBytes = 8000000

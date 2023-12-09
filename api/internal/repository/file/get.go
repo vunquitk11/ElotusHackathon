@@ -3,8 +3,8 @@ package file
 import (
 	"context"
 
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/internal/repository/orm"
+	"github.com/letsvote/api/internal/model"
+	"github.com/letsvote/api/internal/repository/orm"
 	pkgerrors "github.com/pkg/errors"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )

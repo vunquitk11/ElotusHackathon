@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/petme/api/internal/repository/file"
-	"github.com/petme/api/internal/repository/user"
+	"github.com/letsvote/api/internal/repository/file"
+	"github.com/letsvote/api/internal/repository/user"
 	"github.com/stretchr/testify/mock"
 )
 

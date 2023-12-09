@@ -1,8 +1,8 @@
 package authenticated
 
 import (
-	"github.com/petme/api/internal/controller/file"
-	"github.com/petme/api/internal/controller/user"
+	"github.com/letsvote/api/internal/controller/file"
+	"github.com/letsvote/api/internal/controller/user"
 )
 
 // Handler is the web handler for this pkg

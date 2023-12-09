@@ -3,8 +3,8 @@ package file
 import (
 	"context"
 
-	"github.com/petme/api/internal/model"
-	"github.com/petme/api/internal/repository"
+	"github.com/letsvote/api/internal/model"
+	"github.com/letsvote/api/internal/repository"
 )
 
 // The Controller interface provides specification related to order functionality.

@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/petme/api/internal/model"
+	"github.com/letsvote/api/internal/model"
 	"golang.org/x/crypto/bcrypt"
 )
 

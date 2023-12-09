@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/petme/api/pkg/httpserv"
+	"github.com/letsvote/api/pkg/httpserv"
 )
 
 // Logout is handler func for logout of system

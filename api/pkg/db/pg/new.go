@@ -8,7 +8,7 @@ import (
 
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/stdlib"
-	"github.com/petme/api/pkg/app"
+	"github.com/letsvote/api/pkg/app"
 	pkgerrors "github.com/pkg/errors"
 )
 

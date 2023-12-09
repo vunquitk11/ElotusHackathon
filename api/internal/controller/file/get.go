@@ -3,7 +3,7 @@ package file
 import (
 	"context"
 
-	"github.com/petme/api/internal/model"
+	"github.com/letsvote/api/internal/model"
 )
 
 // GetFilesByUsername return list file by username

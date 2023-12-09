@@ -7,7 +7,7 @@ import (
 	"time"
 
 	redigo "github.com/gomodule/redigo/redis"
-	"github.com/petme/api/pkg/app"
+	"github.com/letsvote/api/pkg/app"
 )
 
 // NewClient connects to Redis and returns a client which is used to access Redis
